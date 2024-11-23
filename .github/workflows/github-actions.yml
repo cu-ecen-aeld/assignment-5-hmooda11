@@ -17,10 +17,6 @@ jobs:
           - uses: webfactory/ssh-agent@v0.5.3
             with:
                 ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-          - name: Debug SSH Agent
-            run: |
-              eval "$(ssh-agent -s)"
-              ssh-add -l || echo "No identities loaded"
           - name: Run full test
             env:
               GIT_SSH_COMMAND: "ssh -o StrictHostKeyChecking=no"
@@ -28,5 +24,4 @@ jobs:
           - name: Cleanup
             if: always()
             run: |
-              eval "$(ssh-agent -s)" || echo "Agent already running"
-              ssh-add -D || true
+              ssh-add -D
