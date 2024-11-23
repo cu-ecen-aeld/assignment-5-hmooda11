@@ -7,7 +7,9 @@ on:
             - '*'
 jobs:
     full-test:
-        container: cuaesd/aesd-autotest:24-assignment5-buildroot
+        container:
+      	  image: cuaesd/aesd-autotest:24-assignment5-buildroot
+          options: --privileged
         runs-on: self-hosted
         timeout-minutes: 120
         steps:
